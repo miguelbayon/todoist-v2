@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
 /**
  * Write a description of class ListaTareas here.
  * 
@@ -77,6 +78,37 @@ public class ListaTareas
             listaDeTareas.get(posicionReal).establecerFechaVencimiento(anio, mes, dia);
         }
     }
+    
+    
+    public void mostrarHoy()
+    {
+        int posicion = 1;
+        LocalDate hoy = LocalDate.now();
+        for (Tarea tarea : listaDeTareas) { 
+            if (tarea.getFecha() != null) {
+                if(tarea.getFecha().isEqual(hoy)){
+                    System.out.println(posicion + ". " + tarea.toString());
+                }
+            }
+            posicion++;
+        }
+    }
+    
+    public void mostrarVencidas()
+    {
+        int posicion = 1;
+        LocalDate hoy = LocalDate.now();
+        for (Tarea tarea : listaDeTareas) { 
+            if (tarea.getFecha() != null) {
+                if(tarea.getFecha().isBefore(hoy)){
+                    System.out.println(posicion + ". " + tarea.toString());
+                }
+            }
+            posicion++;
+        }
+    }
+    
+    
 }
 
 
