@@ -59,6 +59,24 @@ public class ListaTareas
     }
     
     
+    public void establecerNuevaPrioridad (int posicion , int prioridad){
+        
+        int posicionReal = posicion - 1;
+        if (posicionReal >= 0 && posicionReal < listaDeTareas.size()){
+            if(prioridad >= 0 && prioridad <= 5){
+                listaDeTareas.get(posicionReal).cambiarPrioridad(prioridad);
+            }
+        }
+        
+    }
+    
+    public void setFechaVencimiento(int posicion, int anio, int mes, int dia)
+    {
+        int posicionReal = posicion - 1;
+        if (posicionReal >= 0 && posicionReal < listaDeTareas.size()){
+            listaDeTareas.get(posicionReal).establecerFechaVencimiento(anio, mes, dia);
+        }
+    }
 }
 
 
