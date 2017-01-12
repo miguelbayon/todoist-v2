@@ -1,5 +1,3 @@
-
-
 import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
@@ -32,10 +30,12 @@ public class ListaTareasTest
     {
         listaTar1 = new ListaTareas();
         listaTar1.addTarea("Hacer la cama");
-        listaTar1.addTarea("Estdiar programacion");
+        listaTar1.addTarea("Estudiar programacion");
         listaTar1.addTarea("Jugar  a la play");
-        listaTar1.marcarComoCompletada(2);
-        listaTar1.mostrarTareas();
+        listaTar1.addTarea("Comprar las entradas para el festival");
+        listaTar1.addTarea("Limpiar el baño");
+        listaTar1.addTarea("Llevar el coche al taller");    
+        listaTar1.addTarea("Descargar la ultima temporada de Juego de Tronos");      
     }
 
     /**
@@ -47,4 +47,17 @@ public class ListaTareasTest
     public void tearDown()
     {
     }
+
+    @Test
+    public void prioridadMasAlta()
+    {
+        listaTar1.mostrarTareas();
+        listaTar1.establecerNuevaPrioridad(6, 4);
+        listaTar1.establecerNuevaPrioridad(2, 4);
+        listaTar1.establecerNuevaPrioridad(3, 3);
+        listaTar1.establecerNuevaPrioridad(5, 2);
+    }
 }
+
+
+
