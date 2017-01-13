@@ -11,13 +11,15 @@ public class Tarea
     private boolean terminada;
     private int prioridad;
     private LocalDate fechaVencimiento;
+    private int id;
     
-    public Tarea(String descripcion)
+    public Tarea(String descripcion, int id)
     {
         terminada = false;
         this.descripcion = descripcion;
         prioridad = 0;
         fechaVencimiento = null;
+        this.id = id;
     }
     
     public String getDescripcion() 
@@ -50,7 +52,7 @@ public class Tarea
             
             fechaDevolver = getDia + "-" + getMes + "-" + getAnio;
         }
-        textoADevolver += descripcion + " (" + prioridad + ") " + fechaDevolver;
+        textoADevolver += id + ". " + descripcion + " (" + prioridad + ") " + fechaDevolver;
         return textoADevolver;
     }
     

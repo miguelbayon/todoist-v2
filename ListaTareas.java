@@ -9,15 +9,18 @@ import java.time.LocalDate;
 public class ListaTareas
 {
     private ArrayList<Tarea> listaDeTareas;
+    private int proximoIdAAsignar;
 
     public ListaTareas()
     {
         listaDeTareas = new ArrayList<Tarea>();
+        proximoIdAAsignar = 10;
     }
 
     public void addTarea(String descripcionTarea)
     {
-        Tarea tarea = new Tarea(descripcionTarea);
+        Tarea tarea = new Tarea(descripcionTarea, proximoIdAAsignar);
+        proximoIdAAsignar++;
         listaDeTareas.add(tarea);
     }
 
