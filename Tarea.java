@@ -78,6 +78,11 @@ public class Tarea
     {
         return prioridad;
     }
+    
+    public int getId()
+    {
+        return id;
+    }
 }
 
 

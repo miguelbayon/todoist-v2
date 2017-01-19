@@ -33,12 +33,12 @@ public class ListaTareas
         }
     }
 
-    public void marcarComoCompletada(int posicionTarea)
+    public void marcarComoCompletada(int id)
     {
-        int posicionReal = posicionTarea - 1;
-        if (posicionReal >= 0 && posicionReal < listaDeTareas.size()) {
+        int posicionReal = getPosicionById(id);     
+        if (posicionReal != -1) {
             listaDeTareas.get(posicionReal).marcarComoCompletada();
-        }   
+        }
     }
 
     public void mostrarCoincidentes(String textoABuscar) 
@@ -53,17 +53,17 @@ public class ListaTareas
         }   
     }
 
-    public void eliminarTarea(int posicionTarea)
+    public void eliminarTarea(int id)
     {
-        int posicionReal = posicionTarea - 1;       
-        if (posicionReal >= 0 && posicionReal < listaDeTareas.size()) {
+        int posicionReal = getPosicionById(id);      
+        if (posicionReal != -1) {
             listaDeTareas.remove(posicionReal);
         }           
     }
 
-    public void establecerNuevaPrioridad (int posicion , int prioridad){
-        int posicionReal = posicion - 1;
-        if (posicionReal >= 0 && posicionReal < listaDeTareas.size()){
+    public void establecerNuevaPrioridad (int id , int prioridad){
+        int posicionReal = getPosicionById(id);     
+        if (posicionReal != -1){
             if(prioridad >= 0 && prioridad <= 5){
                 listaDeTareas.get(posicionReal).cambiarPrioridad(prioridad);
             }
@@ -71,10 +71,10 @@ public class ListaTareas
 
     }
 
-    public void setFechaVencimiento(int posicion, int anio, int mes, int dia)
+    public void setFechaVencimiento(int id, int anio, int mes, int dia)
     {
-        int posicionReal = posicion - 1;
-        if (posicionReal >= 0 && posicionReal < listaDeTareas.size()){
+        int posicionReal = getPosicionById(id); 
+        if (posicionReal != -1){
             listaDeTareas.get(posicionReal).establecerFechaVencimiento(anio, mes, dia);
         }
     }
@@ -141,7 +141,113 @@ public class ListaTareas
             System.out.println(tareaMasPrioritaria);
         }        
     }
+    
+    
+    /**
+     * Metodo que devuelve el indice de una tarea en funcion
+     * de su id en caso de que exista. Devuelve -1 en caso de 
+     * que no sea capaz de encontrar una tarea con ese id.
+     */
+    public int getPosicionById(int idBuscada)
+    {
+        int posicionBuscada = -1;
+        int posicionActual = 0;
+        boolean buscando = true;
+        while ((posicionActual < listaDeTareas.size()) && (buscando)) {
+            if (idBuscada == listaDeTareas.get(posicionActual).getId()) {
+                posicionBuscada = posicionActual;
+                buscando = false;
+            }
+            posicionActual++;
+        }
+        return posicionBuscada;
+    }
+    
+    
+    public int tareaMasViejaPendiente()
+    {
+        int idEncontrado = -1;
+        
+        idEncontrado = 10;
+       
+        return idEncontrado;
+    }
+    
+    
+    public int numeroTareasSinTerminar()
+    {
+        int numeroDeTareasSinTerminar = 0;
+        
+        for (Tarea tareaActual : listaDeTareas) {
+            if (!tareaActual.estaTerminada()) {
+                numeroDeTareasSinTerminar++;
+            }
+        }
+        
+        
+        return numeroDeTareasSinTerminar;        
+    }
+    
+    
+    
+    public boolean hayTareasDuplicadasJoseLuis()
+    {
+        boolean hayTareasDuplicadas = false;
+        int indiceLento = 0;
+        String descripcionTareaActual = "";
+        boolean buscando = true;
+        while (indiceLento < listaDeTareas.size() && buscando){
+            int indiceRapido = 0;
+            descripcionTareaActual = listaDeTareas.get(indiceLento).getDescripcion();
+            int idTareaActual = listaDeTareas.get(indiceLento).getId();
+            while (indiceRapido < listaDeTareas.size()){
+                if ((listaDeTareas.get(indiceRapido).getId()!= idTareaActual) && 
+                     descripcionTareaActual.equals(listaDeTareas.get(indiceRapido).getDescripcion())){
+                    hayTareasDuplicadas = true;
+                    buscando = false;
+                }
+                indiceRapido++;
+            }
+            indiceLento++;
+        }
+        
+        return hayTareasDuplicadas;
+    }    
+    
+    
+    /**
+     * Metodo que devuelve si hay o no tareas duplicadas. ( true o false )
+     */
+    public boolean hayTareasDuplicadas(){
+        boolean tareaDuplicada = false;
+        int indiceLento = 0;
+        while(indiceLento < listaDeTareas.size()){
+            Tarea tareaActual = listaDeTareas.get(indiceLento);
+            
+            int indiceRapido = 1;
+            while(indiceRapido < listaDeTareas.size()){
+                Tarea tareaOtra = listaDeTareas.get(indiceRapido);
+
+                if(tareaActual.getDescripcion() == tareaOtra.getDescripcion ()){
+                    tareaDuplicada = true;
+
+                }
+                indiceRapido++;
+            }
+            indiceLento++;
+
+        }
+        return tareaDuplicada;
+    }    
 }
+
+
+
+
+
+
+
+
 
 
 

@@ -57,7 +57,49 @@ public class ListaTareasTest
         listaTar1.establecerNuevaPrioridad(3, 3);
         listaTar1.establecerNuevaPrioridad(5, 2);
     }
+
+    @Test
+    public void testTareaMasViejaPendiente()
+    {
+        listaTar1.marcarComoCompletada(10);
+        listaTar1.marcarComoCompletada(11);
+        listaTar1.marcarComoCompletada(13);
+        assertEquals(12, listaTar1.tareaMasViejaPendiente());
+    }
+
+    @Test
+    public void testNumeroTareasSinTerminar()
+    {
+        assertEquals(7, listaTar1.numeroTareasSinTerminar());
+        listaTar1.marcarComoCompletada(10);
+        assertEquals(6, listaTar1.numeroTareasSinTerminar());
+        listaTar1.marcarComoCompletada(16);
+        assertEquals(5, listaTar1.numeroTareasSinTerminar());
+        listaTar1.marcarComoCompletada(11);
+        listaTar1.marcarComoCompletada(12);
+        listaTar1.marcarComoCompletada(13);
+        listaTar1.marcarComoCompletada(14);
+        listaTar1.marcarComoCompletada(15);
+        assertEquals(0, listaTar1.numeroTareasSinTerminar());
+        ListaTareas listaTar2 = new ListaTareas();
+        assertEquals(0, listaTar2.numeroTareasSinTerminar());
+    }
+
+    @Test
+    public void testHayTareasDuplicadas()
+    {
+        assertEquals(false, listaTar1.hayTareasDuplicadas());
+        listaTar1.addTarea("Hacer la cama");
+        assertEquals(true, listaTar1.hayTareasDuplicadas());
+        ListaTareas listaTar2 = new ListaTareas();
+        assertEquals(false, listaTar2.hayTareasDuplicadas());
+        listaTar1.addTarea("Hacer la cama");
+        assertEquals(true, listaTar1.hayTareasDuplicadas());
+    }
 }
+
+
+
 
 
 

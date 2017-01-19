@@ -17,4 +17,6 @@ comment7.params=
 comment7.target=java.time.LocalDate\ getFecha()
 comment8.params=
 comment8.target=int\ obtenerPrioridad()
-numComments=9
+comment9.params=
+comment9.target=int\ getId()
+numComments=10
